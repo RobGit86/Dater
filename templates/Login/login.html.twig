@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('login') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('login') }}
+    {% endblock %}
+
+    <script src="https://kit.fontawesome.com/d69551549e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+
+    <title>Logowanie</title>
+
+</head>
+
+<body>
+
+    <div id="login-container">
+
+            <h2>ZALOGUJ</h2>
+
+            <form action="{{ path('app_login') }}" method="post">
+                <label for="username">Email:</label>
+                <input type="text" id="username" name="_username"/>
+        
+                <label for="password">Hasło:</label>
+                <input type="password" id="password" name="_password"/>
+        
+                {# If you want to control the URL the user is redirected to on success
+                <input type="hidden" name="_target_path" value="/Rejestracja"/> #}
+        
+                <button type="submit">login</button>
+
+                {% if error %}
+                    <div id="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <a href="{{ path('app_home') }}">Powrót do strony głównej</a>
+            </form>
+    </div>
+
+</body>
+
+</html>

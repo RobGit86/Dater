@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('profileMain') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('profileMain') }}
+    {% endblock %}
+
+    <script src="https://kit.fontawesome.com/d69551549e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+
+    <title>Dater</title>
+
+</head>
+
+<body>
+    
+    <div id="header">
+        <a href="{{ path('app_home') }}">Strona główna</a>
+        <h2>Profil: {{ user.nick }}</h2>
+        <hr>
+    </div>
+
+    <div id="content">
+
+        <div id="profile-photo">
+            <img src=" {{ asset('build/images/profilePhoto.b8428432.svg') }}">
+        </div>
+
+
+        <div id="content-left">
+            <form action="{{ path('app_profile_main_upload_image')}}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image"/>
+                <input type="submit"/>
+            </form>
+        </div>
+
+        <div id="content-right">
+
+            <div id="user-params">
+
+                {% if userParams.sex == 'M' %}
+                {% set sexShort = 'Mężczyzna' %}
+                {% endif %}
+                
+                {% if userParams.sex == 'F' %}
+                {% set sexShort = 'Kobieta' %}
+                {% endif %}
+                
+                <div id="prop-sex">
+                    <div>
+                        <i class="fa-solid fa-pen-to-square edit-icon" id="edit-sex-button"></i>
+                        <label for="_sex">Płeć</label>
+                    </div>
+
+                    <div>
+                        <input type="text" id="_sex" value="{{ sexShort }}" autocomplete="off" readonly>
+                        <select id="sex-select">
+                            <option value="M">Mężczyzna</option>
+                            <option value="F">Kobieta</option>
+                        </select>
+                        <i class="fa-regular fa-circle-check confirm" id="confirm-sex-button"></i>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="prop-firstname">
+                        <i class="fa-solid fa-pen-to-square edit-icon" id="edit-firstname-button"></i>
+                        <label for="_firstname">Imię</label>
+                        <input type="text" id="_firstname" value="{{ userParams.firstname }}" autocomplete="off" readonly>
+                        <i class="fa-regular fa-circle-check confirm" id="confirm-firstname-button"></i>
+                    </div>
+
+                    <div id="lastname">
+                        <i class="fa-solid fa-pen-to-square edit-icon"></i>
+                        <label for="_lastname">Nazwisko</label>
+                        <input type="text" id="_lastname" value="{{ userParams.lastname }}" autocomplete="off" readonly>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <button id="confirm-changes">ZMIEN</button>
+
+    <hr>
+
+    <div>
+        <form></form>
+
+    </div>
+
+
+</body>
+
+</html>

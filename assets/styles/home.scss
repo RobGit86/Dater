@@ -1,0 +1,194 @@
+$font-size-base: 16px;
+$font-color-base: #0A0F0D;
+$font-family-first: 'Raleway', sans-serif;
+$color-black: #0A0F0D;
+$color-red: #EE4266;
+$color-gray: #C4CBCA;
+$color-violet: #2A1E5C;
+
+html {
+    font-size: $font-size-base;
+    font-family: $font-family-first;
+    color: $font-color-base;
+}
+
+body {
+    margin: 0 auto;
+}
+
+#contianer-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $color-black;
+}
+
+#logo img {
+    width: 10rem;
+    margin-left: 5rem;
+}
+
+#login-register {
+    display: flex;
+    flex-direction: row;
+}
+
+#login{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-size: 1.2rem;
+}
+
+#register {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-size: 1.2rem;
+}
+
+#login a, #register a {
+    text-decoration: none;
+    color: #EE4266;
+    position: relative;
+}
+
+#login a::before, #register a::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: $font-color-base;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+#login a:hover::before, #register a:hover::before {
+    transform: scaleX(1);
+}
+
+#nick {
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+#nick h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown {
+    list-style: none;
+    color: $color-red;
+}
+
+.dropdown-content {
+    margin-top: 1.5rem;
+    color: $color-gray;
+    background-color: white;
+    border: 1px solid $font-color-base;
+    border-radius: 10px;
+    transform: translate(-50%);
+}
+
+.dropdown-button {
+    cursor: pointer;    
+}
+
+.dropdown-content a {
+    display: block;
+    text-decoration: none;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.dropdown-content i {
+    margin-right: 1rem;
+}
+
+.dropdown-content a:hover {
+    background-color: $color-red;
+}
+
+.dropdown-content a:visited {
+    color: $font-color-base;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#content {
+    background-color: chartreuse;
+}
+
+#content-left img {
+    float: left;
+    width: 50%;
+    height: auto;
+}
+
+#content-right {
+    float: left;;
+    width: 50%;
+}
+
+#content-right div {
+    margin: 3vw 3vw;
+    padding: 3rem 3rem;
+    border: 1px solid;
+    border-radius: 1rem;
+    background-color: white;
+    height: 100%;
+    text-shadow: 1px 1px 2px #000000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#content-right div h1 {
+    font-size: 1.6vw;
+}
+
+#content-right div h2 {
+    font-size: 1vw;
+}
+
+#footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    clear: both;
+    min-height: 200px;
+    background-color: $color-violet;
+    color: $color-gray;
+}
+
+#footer a {
+    display: block;
+    margin: 0.8rem auto;
+    text-decoration: none;
+}
+
+#footer a:visited {
+    color: $color-gray;
+}
+
+#footer a:hover {
+    color:#EE4266;
+}
+
+#footer-social, #footer-reg, #footer-contact {
+    padding: 3rem 3rem;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('profileMain') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('profileMain') }}
+    {% endblock %}
+
+    <title>Dater</title>
+
+</head>
+
+<body>
+   
+    {% for message in app.flashes('clearProfile') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <a href="{{ path('app_home') }}">Strona główna</a>
+
+    <h1>PROFIL NIE UZUPELNIONY !</h1>
+    <h2>Możesz jedynie przegladac inne profile</h2>
+    <h2>Żeby uzupelnic swoj profil, kliknij ponizsyz link</h2>
+   
+    <hr>
+
+    {{ form(makeProfileForm) }}
+    
+</body>
+
+</html>

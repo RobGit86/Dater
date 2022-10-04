@@ -1,0 +1,53 @@
+$font-size-base: 16px;
+$font-color-base: #0A0F0D;
+$font-family-first: 'Raleway', sans-serif;
+$color-black: #0A0F0D;
+$color-red: #EE4266;
+$color-gray: #C4CBCA;
+$color-violet: #2A1E5C;
+
+html {
+    font-family: $font-family-first;
+    font-size: $font-size-base;
+}
+
+body {
+    margin: 0 auto;
+}
+
+#login-container {
+    margin: 16rem auto;
+    padding: 2rem;
+    width: 20%;
+    border: 1px solid $font-color-base;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#login-container form,h2 {
+    padding: 0 2rem;
+}
+
+#login-container form button {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#login-container form a {
+    margin-top: 1rem;
+}
+
+label {
+    display: block;
+    padding-top: 1rem;
+}
+
+input {
+    width: 100%;
+    display: block;
+}
+
+#error {
+    color: $color-red;
+}

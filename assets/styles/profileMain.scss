@@ -1,0 +1,96 @@
+$font-size-base: 16px;
+$font-color-base: #0A0F0D;
+$font-family-first: 'Raleway', sans-serif;
+$color-black: #0A0F0D;
+$color-red: #EE4266;
+$color-gray: #C4CBCA;
+$color-violet: #2A1E5C;
+
+html {
+    font-size: $font-size-base;
+    font-family: $font-family-first;
+    color: $font-color-base;
+}
+
+body {
+    margin: 0 auto;
+}
+
+#header {
+    background-color: #EE4266;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#content-left {
+    padding: 2rem;
+}
+
+#profile-photo {
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+}
+
+#profile-photo img {
+    width: 300px;
+    height: 300px;
+}
+
+#content-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#content-right input, select {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-family: $font-family-first;
+    border: 0;
+    outline: 0;
+}
+
+#content-right button {
+    display: inline;
+}
+
+#user-params div {
+    margin-bottom: 1rem;
+}
+
+#user-params label {
+    margin-left: 0.2rem;
+    font-weight: 700;
+}
+
+#user-params input {
+    // display: inline;
+}
+
+.edit-icon {
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    color: green;
+}
+
+.confirm:hover {
+    color: green;
+    cursor: pointer;
+}
+
+#sex-select, #confirm-sex-button, #confirm-firstname-button {
+    // display: none;
+    display: inline;
+}
+
+#labels {
+    background-color: red;
+    text-align: right;
+}
