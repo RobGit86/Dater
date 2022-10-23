@@ -6,6 +6,7 @@ $color-red: #EE4266;
 $color-gray: #C4CBCA;
 $color-violet: #2A1E5C;
 
+
 html {
     font-size: $font-size-base;
     font-family: $font-family-first;
@@ -24,10 +25,16 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: flex-start;
+    // width: 50%;
 }
 
+// CONTENT LEFT
+
 #content-left {
-    padding: 2rem;
+    background-color: aqua;
+    display: flex;    
+    flex-direction: column;
 }
 
 #profile-photo {
@@ -41,56 +48,84 @@ body {
     height: 300px;
 }
 
+// CONTENT RIGHT
+
 #content-right {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    width: 50%;
 }
 
-#content-right input, select {
-    display: block;
-    margin-bottom: 0.8rem;
-    font-family: $font-family-first;
-    border: 0;
-    outline: 0;
+.content-right-grid {
+    display: grid;
+    grid-template-columns: 
+        [data-header]   2fr 
+        [data]          3fr        
+        [edit]          1fr
+        [visib]         1fr;
+    grid-template-rows: 
+        1.5fr
+        1fr 1fr 1fr 1fr 1fr 1fr
+    ;
 }
 
-#content-right button {
-    display: inline;
+h4 {
+    margin-top: 0;
+    margin-bottom: 0rem;
 }
 
-#user-params div {
-    margin-bottom: 1rem;
+.row-first {
+    border-bottom: 1px solid black;
 }
 
-#user-params label {
-    margin-left: 0.2rem;
-    font-weight: 700;
+.row-first h3 {
+    margin: 0;
+    color: $color-black;
 }
 
-#user-params input {
-    // display: inline;
+.row-grid {
+    margin-top: 1rem;
+    padding-right: 1rem;
 }
 
-.edit-icon {
+.col-headers {
+    grid-column-start: data-header;
+    justify-self: end;
+}
+
+.icon-editable {
+    color: green;
     cursor: pointer;
 }
 
-.edit-icon:hover {
-    color: green;
+.icon-noneditable {
+    color: gray;
 }
 
-.confirm:hover {
-    color: green;
-    cursor: pointer;
+// MODAL EDIT
+
+.modal {
+    display: none;
+    background-color: yellow;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    padding-top: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
 }
 
-#sex-select, #confirm-sex-button, #confirm-firstname-button {
-    // display: none;
-    display: inline;
+.modal-content {
+    background-color: #EE4266;
+    margin: auto;
+    padding: 20px;
+    width: 40%;
 }
 
-#labels {
-    background-color: red;
-    text-align: right;
+#content-right {
+    background-color: aquamarine;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: flex-start;
 }

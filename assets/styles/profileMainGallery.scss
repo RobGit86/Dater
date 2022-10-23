@@ -1,0 +1,72 @@
+$font-size-base: 16px;
+$font-color-base: #0A0F0D;
+$font-family-first: 'Raleway', sans-serif;
+$color-black: #0A0F0D;
+$color-red: #EE4266;
+$color-gray: #C4CBCA;
+$color-violet: #2A1E5C;
+
+
+html {
+    font-size: $font-size-base;
+    font-family: $font-family-first;
+    color: $font-color-base;
+}
+
+body {
+    margin: 0 auto;
+}
+
+.header {
+    background-color: $color-red;
+    color: $color-black;
+}
+
+#gallery-profile-container {
+    margin: 0 3rem;
+}
+
+#gallery-profile-header div {
+    display: inline-block;
+}
+
+#gallery-profile-header form {
+    margin-left: 4rem;
+}
+
+
+#gallery-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 5rem;
+}
+
+#gallery-profile-img-container img {
+    width: 20rem;
+    height: 20rem;
+    // max-width: 100%;
+    // border: 1px solid $color-black;
+    // box-shadow: 2px 1px 1px #888888;
+    // background-color: #2A1E5C;
+}
+
+#gallery-profile-img-container div {
+    // display: inline-block;
+}
+
+.photo-description {
+    // margin: 0;
+    // padding: 0;
+    // background-color: aqua;
+    // border-left: 1px solid $color-black;
+    // border-right: 1px solid $color-black;
+    // border-bottom: 1px solid $color-black;
+}
+
+.photo-description h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding-top: 0.2rem;
+    padding-bottom: 0.1rem;
+}

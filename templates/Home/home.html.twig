@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <head>
 
     {% block stylesheets %}
@@ -23,13 +21,13 @@
 </head>
 
 <body>
-    
+
     <div id="container-flex">
         
         <div id="header">
 
             <div id="logo">
-                <img src={{ asset('build/images/logo.5c68604a.svg')}} alt="logo">
+                <img src={{ asset('build/images/logo.5c68604a.svg') }} alt="logo">
             </div>
 
             {% if not logged %}
@@ -38,7 +36,7 @@
                     <a href="{{ path('app_login') }}">Zaloguj się</a>    
                 </div>
                 <div id="register">
-                    <a href="/Rejestracja">Zarejestruj się</a>    
+                    <a href="{{ path('app_register') }}">Zarejestruj się</a>
                 </div>    
             </div>
             {% endif %}
@@ -48,7 +46,7 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                 <div id="admin-panel">
-                    <a href="/AdminPanel">PANEL ADMIN</a>
+                    <a href="{{ path('app_admin_panel')}}">PANEL ADMIN</a>
                 </div>
                 {% endif %}
 
@@ -58,13 +56,13 @@
                         <a href="#"><i class="fa-solid fa-comment"> </i>Powiadomienia</a>
                         <a href="{{ path('app_profile_main') }}"><i class="fa-solid fa-address-card"> </i>Mój profil</a>
                         <a href="#"><i class="fa-solid fa-gear"></i>Ustawienia konta</a>
-                        <a href="/Logout"><i class="fa-solid fa-right-from-bracket"></i>Wyloguj</a>
+                        <a href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i>Wyloguj</a>
                     </div>
                 </div>
 
                 {% if logged %}
                 <div id="nick">
-                    <h3>Witaj {{ nick }} !</h3> 
+                    <h3>Witaj {{ user.nick }} !</h3> 
                 </div>    
                 {% endif %}
 

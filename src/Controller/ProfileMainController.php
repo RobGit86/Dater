@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use \Datetime;
 use App\Entity\User;
 use App\Entity\UserParams;
+use App\Entity\Gallery;
 use App\Form\ProfileFillForm;
 use App\Form\ProfileRemoveForm;
+use App\Form\ProfileEdit\EditFirstnameForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +23,7 @@ class ProfileMainController extends AbstractController
     public function profileMain(Request $request, ManagerRegistry $doctrine): Response
     {   
 
-        if(!$this->getUser()->getUserParams()) {
+        if($this->getUser()->getUserParams() === null) {
 
             return $this->redirectToRoute('app_profile_main_make');
 
@@ -36,8 +39,22 @@ class ProfileMainController extends AbstractController
                 return $this->redirectToRoute('app_profile_main_remove');
             }
 
+            $em = $doctrine->getManager();
+
+            $editFirstnameForm = $this->createForm(EditFirstnameForm::class);
+            $editFirstnameForm->handleRequest($request);
+
+            if($editFirstnameForm->isSubmitted()) {
+
+                $data = $editFirstnameForm->getData();
+
+                $userParams->setFirstname($data['firstname']);
+                $em->flush();
+            }
+
             return $this->renderForm('ProfileMain/profile_main.html.twig', [
                 'profileRemoveForm' => $profileRemoveForm,
+                'editFirstnameForm' => $editFirstnameForm,
                 'user' => $user,
                 'userParams' => $userParams,
             ]);
@@ -139,6 +156,10 @@ class ProfileMainController extends AbstractController
     public function profileUploadImage(Request $request, ManagerRegistry $doctrine): Response
     {  
 
+        $data = $request->get('image');
+        echo $data;
+
+
         if(isset($_FILES['image'])) {
             $fileName = $_FILES['image']['name'];
             $fileTmp = $_FILES['image']['tmp_name'];
@@ -165,7 +186,89 @@ class ProfileMainController extends AbstractController
         move_uploaded_file($fileTmp, $path);
 
         // return new Response(implode(",", $_FILES['image']));
-        return new Response("OK");
+        return new Response($data);
     }
 
+    #[Route('/Profil/Galeria', name: 'app_profile_main_gallery')]
+    public function profileGallery(Request $request, ManagerRegistry $doctrine): Response
+    {  
+
+        $user = $this->getUser();
+        $userParams = $this->getUser()->getUserParams();
+
+        $em = $doctrine->getManager();
+
+        if(isset($_FILES['image_profile'])) {
+
+            $countPhotos = count($_FILES['image_profile']['name']);
+
+            for($i = 0; $i < $countPhotos; $i++) {
+
+                $filename = $_FILES['image_profile']['name'][$i];
+                $ext = pathinfo($filename)['extension'];
+
+                $filename = substr(md5(uniqid(mt_rand(), true)), 0, 10) . '.' . $ext;
+                $fileTmp = $_FILES['image_profile']['tmp_name'][$i];
+                $dirRelative = '/gallery/' . $user->getId() . '/' . $filename;
+                $dirPhoto = $this->getParameter('kernel.project_dir') . '/public' . $dirRelative;
+
+                move_uploaded_file($fileTmp, $dirPhoto);
+
+                $photo = new Gallery();
+                $photo->setUserParams($userParams);
+                $photo->setFilename($filename);
+                $photo->setFilepath($dirRelative);
+                $photo->setCreateDate(new DateTime());
+                $photo->setProfile(true);
+
+                $em->persist($photo);
+                $em->flush();
+            }
+        }
+
+        if(isset($_FILES['image_photos'])) {
+
+            $countPhotos = count($_FILES['image_photos']['name']);
+
+            for($i = 0; $i < $countPhotos; $i++) {
+
+                $filename = $_FILES['image_photos']['name'][$i];
+                $ext = pathinfo($filename)['extension'];
+
+                $filename = substr(md5(uniqid(mt_rand(), true)), 0, 10) . '.' . $ext;
+                $fileTmp = $_FILES['image_photos']['tmp_name'][$i];
+                $dirRelative = '/gallery/' . $user->getId() . '/' . $filename;
+                $dirPhoto = $this->getParameter('kernel.project_dir') . '/public' . $dirRelative;
+
+                move_uploaded_file($fileTmp, $dirPhoto);
+
+                $photo = new Gallery();
+                $photo->setUserParams($userParams);
+                $photo->setFilename($filename);
+                $photo->setFilepath($dirRelative);
+                $photo->setCreateDate(new DateTime());
+                $photo->setProfile(false);
+
+                $em->persist($photo);
+                $em->flush();
+            }
+        }
+
+        $galleryProfile = $em->getRepository(Gallery::class)->findBy([
+            'user_params' => $userParams,
+            'profile' => (string)true,
+        ]);
+
+        $galleryPhotos = $em->getRepository(Gallery::class)->findBy([
+            'user_params' => $userParams,
+            'profile' => (string)false,
+        ]);
+
+        return $this->renderForm('ProfileMain/profile_main_gallery.html.twig', [
+            'user' => $user,
+            'userParams' => $userParams,
+            'galleryProfile' => $galleryProfile,
+            'galleryPhotos' => $galleryPhotos,
+        ]);
+    }
 }

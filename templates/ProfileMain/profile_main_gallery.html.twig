@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('profileMainGallery') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('profileMainGallery') }}
+    {% endblock %}
+
+    <script src="https://kit.fontawesome.com/d69551549e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+
+    <title>Dater</title>
+
+</head>
+
+<body>
+    
+    <div>
+
+        <header class="header">
+            <a href="{{ path('app_home') }}">Strona główna</a>
+            <h2>Profil: {{ user.nick }}</h2>
+        </header>
+        
+        <div id="gallery-profile-container">
+            
+            <div id="gallery-profile-header">
+                <div>
+                    <h1>ZDJĘCIA PROFILOWE</h1>
+                </div>
+                <div>
+                    <form action="{{ path('app_profile_main_gallery')}}" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="image_profile[]" multiple/>
+                        <input type="submit" value="Załaduj zdjęcie"/>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="gallery-profile">
+                {% for photo in galleryProfile %}
+                <div id="gallery-profile-img-container">
+                    <img src={{ photo.filepath }}>
+                    <div>
+                        <div class="photo-description">
+                            <h3>{{ photo.filename }}</h3>
+                            <h5>dodano {{ photo.createDate | date('Y-m-d') }}</h5>
+                        </div>
+                        <div>USUN</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div>
+            <h1>ZDJĘCIA ZWYKŁE</h1>
+
+            <form action="{{ path('app_profile_main_gallery')}}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image_photos[]"/>
+                <input type="submit"/>
+                </div>
+            </form>
+
+            <div id="gallery-photos">
+                {% for photo in galleryPhotos %}
+                <img src={{ photo.filepath }}>
+                {% endfor %}
+            </div>
+
+        </div>        
+    </div>
+
+</body>
+
+</html>

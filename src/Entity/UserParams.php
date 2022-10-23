@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserParamsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserParamsRepository::class)]
@@ -24,6 +26,14 @@ class UserParams
 
     #[ORM\OneToOne(mappedBy: 'user_params', cascade: ['persist', 'remove'])]
     private ?User $id_user = null;
+
+    #[ORM\OneToMany(mappedBy: 'user_params', targetEntity: Gallery::class)]
+    private Collection $gallery;
+
+    public function __construct()
+    {
+        $this->gallery = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -84,6 +94,36 @@ class UserParams
         }
 
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Gallery>
+     */
+    public function getGallery(): Collection
+    {
+        return $this->gallery;
+    }
+
+    public function addGallery(Gallery $gallery): self
+    {
+        if (!$this->gallery->contains($gallery)) {
+            $this->gallery->add($gallery);
+            $gallery->setUserParams($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Gallery $gallery): self
+    {
+        if ($this->gallery->removeElement($gallery)) {
+            // set the owning side to null (unless already changed)
+            if ($gallery->getUserParams() === $this) {
+                $gallery->setUserParams(null);
+            }
+        }
 
         return $this;
     }

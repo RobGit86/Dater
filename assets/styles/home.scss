@@ -5,6 +5,7 @@ $color-black: #0A0F0D;
 $color-red: #EE4266;
 $color-gray: #C4CBCA;
 $color-violet: #2A1E5C;
+$color-turk: #3CBBB1;
 
 html {
     font-size: $font-size-base;
@@ -104,6 +105,7 @@ body {
 }
 
 .dropdown-content a {
+    color: $color-black;
     display: block;
     text-decoration: none;
     margin: 1rem auto;
@@ -176,6 +178,7 @@ body {
 }
 
 #footer a {
+    color: $color-gray;
     display: block;
     margin: 0.8rem auto;
     text-decoration: none;
